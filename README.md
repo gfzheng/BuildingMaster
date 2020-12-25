@@ -50,7 +50,7 @@
 
    登录与注册流程图：
 
-   ![login](img\login.png)
+   ![login](./login.png)
 
    ​	这里依照流程图的顺序进行说明。
 
