@@ -14,20 +14,45 @@ import cn.edu.sysu.buildingmaster.Task.TaobaoGoldCoin;
 import cn.edu.sysu.buildingmaster.Task.TmallFarm;
 import cn.edu.sysu.buildingmaster.Task.Wechat;
 import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import cn.leancloud.types.AVNull;
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 public class UploadData {
     private static final String TAG = "InitData";
-    public static void initData(Context context){
-        ArrayList<TaskItem> items =new ArrayList<>();
+    public static void initData(final Context context){
+        final ArrayList<TaskItem> items =new ArrayList<>();
         TaskItem taobaoGold = new TaskItem("10","淘宝金币","自动浏览商品网页，从而获取金币。",0,"Guifeng",false, BitmapFactory.decodeResource(context.getResources(), R.drawable.head), TaobaoGoldCoin.collectGoldCoin());
         TaskItem tmallFarm = new TaskItem("1594796172267","天猫农场刷阳光","自动浏览商品网页，从而获取阳光。",0,"Roger",false, BitmapFactory.decodeResource(context.getResources(), R.drawable.head), TmallFarm.collectSunshine());
         TaskItem shareMoment = new TaskItem("0","自动发送朋友圈","可以自动发送一条测试朋友圈",0,"Roger",false,BitmapFactory.decodeResource(context.getResources(), R.drawable.head), Wechat.shareMoment());
         items.add(tmallFarm);
         items.add(shareMoment);
         items.add(taobaoGold);
-        transformDataAndUpload(items);
+        AVQuery<AVObject> query = new AVQuery<>("Tasks");
+        query.deleteAllInBackground().subscribe(new Observer<AVNull>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull AVNull avObject) {
+                transformDataAndUpload(items);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
     }
 
     public static void transformDataAndUpload(ArrayList<TaskItem> items){

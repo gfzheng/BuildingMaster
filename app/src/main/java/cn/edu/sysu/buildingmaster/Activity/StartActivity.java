@@ -17,8 +17,8 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         TaskContent.initData(getApplicationContext());
+        UploadData.initData(this);
         OnlineTaskContent.initData();
- //       UploadData.initData(this);
 
         new Thread(new Runnable() {
             @Override
