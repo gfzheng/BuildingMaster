@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.content.Intent;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,9 +21,36 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class BuildingService extends AccessibilityService {
     private final static String TAG = "BuildingService";
+    private int mDebugDepth;
+
+    private void printAllViews(AccessibilityNodeInfo mNodeInfo) {
+        if (mNodeInfo == null) return;
+        String log ="";
+        for (int i = 0; i < mDebugDepth; i++) {
+            log += ".";
+        }
+        log+="("+mNodeInfo.getText() +" <-- "+
+                mNodeInfo.getViewIdResourceName()+")";
+        Log.d(TAG, log);
+        if (mNodeInfo.getChildCount() < 1) return;
+        mDebugDepth++;
+
+        for (int i = 0; i < mNodeInfo.getChildCount(); i++) {
+            printAllViews(mNodeInfo.getChild(i));
+        }
+        mDebugDepth--;
+    }
+
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+        mDebugDepth = 0;
+        AccessibilityNodeInfo mNodeInfo = event.getSource();
+        printAllViews(mNodeInfo);
+//        Log.v(TAG, mNodeInfo.toString());
         switch (event.getEventType()){
+            case AccessibilityEvent.TYPE_VIEW_CLICKED:
+                Log.i(TAG,"Get TYPE_VIEW_CLICKED:"+event.getSource() + "/" + event.getClassName());
+                break;
             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:
                 Log.i(TAG,"Get TYPE_WINDOW_STATE_CHANGED:"+event.getPackageName() + "/" + event.getClassName());
                 break;
