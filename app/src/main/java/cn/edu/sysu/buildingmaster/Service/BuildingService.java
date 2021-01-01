@@ -23,8 +23,11 @@ public class BuildingService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         switch (event.getEventType()){
+            case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:
+                Log.i(TAG,"Get TYPE_WINDOW_STATE_CHANGED:"+event.getPackageName() + "/" + event.getClassName());
+                break;
             case AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED:
-                Log.i(TAG,"Get NOtification."+event.getPackageName());
+                Log.i(TAG,"Get NOtification."+event.getPackageName() + "/" + event.getClassName());
                 if (event.getPackageName().toString().equals("com.tencent.mm")){
                     if (event.getParcelableData() != null && event.getParcelableData() instanceof Notification){
                         Notification notification = (Notification)event.getParcelableData();

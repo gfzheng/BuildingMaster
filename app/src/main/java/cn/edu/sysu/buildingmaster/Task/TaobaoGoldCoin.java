@@ -11,7 +11,7 @@ public class TaobaoGoldCoin {
         OperationBuilder builder = OperationBuilder.create().setPkgName("com.taobao.taobao")
                 .setClassName("com.taobao.browser.exbrowser.BrowserUpperActivity")
                 .next(OperationFactory.create(GestureOperation.class).add(360,340).select(GestureOperation.CLICK).setDelay(5000))
-//                .next(OperationFactory.create(GestureOperation.class).add(540,1800,540,200).select(GestureOperation.SCROLL).setDelay(20000))
+                .next(OperationFactory.create(GestureOperation.class).add(540,1800,540,200).select(GestureOperation.SCROLL).setDelay(20000))
                 .next(OperationFactory.create(GlobalAction.class).add(GlobalAction.ACTION_BACK));
         return builder;
     }

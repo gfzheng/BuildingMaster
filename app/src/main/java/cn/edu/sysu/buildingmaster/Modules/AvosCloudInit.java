@@ -11,7 +11,8 @@ public class AvosCloudInit extends Application {
     public void onCreate() {
         super.onCreate();
 
-        AVOSCloud.initialize(this,"Bcmb2UAnkexSOQojWhDOzyqq-9Nh9j0Va","jHxMdH1yraACm21axAEhVadV","https://bcmb2uan.lc-cn-e1-shared.com");
+        //AVOSCloud.initialize(this,"Bcmb2UAnkexSOQojWhDOzyqq-9Nh9j0Va","jHxMdH1yraACm21axAEhVadV","https://bcmb2uan.lc-cn-e1-shared.com");
+        AVOSCloud.initialize(this,"7QYL8Sxr6lzRnAVIVPfo7LzE-gzGzoHsz","pFFXcyAFtRX9wd7mds3PBjEP","https://7qyl8sxr.lc-cn-n1-shared.com");
         AVOSCloud.setLogLevel(AVLogger.Level.DEBUG);
     }
 }

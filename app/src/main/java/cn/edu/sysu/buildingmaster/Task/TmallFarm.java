@@ -8,7 +8,7 @@ import cn.edu.sysu.buildingmaster.Modules.Operation.OperationFactory.OperationFa
 public class TmallFarm {
     private static final String TAG = "TmallFarm";
     public static OperationBuilder collectSunshine(){
-        OperationBuilder builder = OperationBuilder.create().setPkgName("com.tmall.wireless")
+        return OperationBuilder.create().setPkgName("com.tmall.wireless")
                 .setClassName("com.tmall.wireless.splash.TMSplashActivity")
                 .next(OperationFactory.create(GestureOperation.class).add(540,1200).select(GestureOperation.CLICK).setDelay(5000))
                 .next(OperationFactory.create(GestureOperation.class).add(1000,1000).select(GestureOperation.CLICK).setDelay(5000))
@@ -19,6 +19,5 @@ public class TmallFarm {
                 .next(OperationFactory.create(GestureOperation.class).add(1020,740).select(GestureOperation.CLICK))
                 .next(OperationFactory.create(GestureOperation.class).add(50,144).select(GestureOperation.CLICK))
                 .next(OperationFactory.create(GlobalAction.class).add(GlobalAction.ACTION_BACK));
-        return builder;
     }
 }
